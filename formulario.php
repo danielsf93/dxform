@@ -8,6 +8,9 @@
         <label for="horario">Horário:</label>
         <input type="text" name="horario" id="horario" required>
         <br>
+        <label for="data">Data:</label>
+        <input type="text" name="data" id="data" required>
+        <br>
         <label for="local">Local:</label>
         <input type="text" name="local" id="local" required>
         <br>
@@ -42,7 +45,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Verificar se os campos obrigatórios estão presentes e não estão vazios
-        $campos_obrigatorios = array('horario', 'local', 'frequencia', 'equipamento');
+        $campos_obrigatorios = array('horario', 'data', 'local', 'frequencia', 'equipamento');
         $campos_preenchidos = true;
 
         foreach ($campos_obrigatorios as $campo) {
@@ -55,6 +58,7 @@
         if ($campos_preenchidos) {
             // Criar a mensagem com os campos preenchidos
             $mensagem = 'Horário: ' . $_POST['horario'] . '<br>';
+            $mensagem = 'Data ' . $_POST['data'] . '<br>';
             $mensagem .= 'Local: ' . $_POST['local'] . '<br>';
             $mensagem .= 'Frequência: ' . $_POST['frequencia'] . '<br>';
             $mensagem .= 'Equipamento: ' . $_POST['equipamento'] . '<br>';
