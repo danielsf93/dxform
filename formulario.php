@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Formulário</title>
+    <title>Formulário SW</title>
+    <script>
+        function preencherDataEHoraAtual() {
+            var dataEHoraAtual = new Date().toLocaleString().split(", ");
+            document.getElementById("data").value = dataEHoraAtual[0];
+            document.getElementById("horario").value = dataEHoraAtual[1];
+        }
+    </script>
 </head>
-<body>
+<body onload="preencherDataEHoraAtual()">
+    <h1>Formulário SW</h1>
+
     <form method="POST">
         <label for="horario">Horário:</label>
         <input type="text" name="horario" id="horario" required>
@@ -58,7 +67,7 @@
         if ($campos_preenchidos) {
             // Criar a mensagem com os campos preenchidos
             $mensagem = 'Horário: ' . $_POST['horario'] . '<br>';
-            $mensagem = 'Data ' . $_POST['data'] . '<br>';
+            $mensagem .= 'Data: ' . $_POST['data'] . '<br>';
             $mensagem .= 'Local: ' . $_POST['local'] . '<br>';
             $mensagem .= 'Frequência: ' . $_POST['frequencia'] . '<br>';
             $mensagem .= 'Equipamento: ' . $_POST['equipamento'] . '<br>';
@@ -76,29 +85,6 @@
     foreach ($_SESSION['mensagens'] as $mensagem) {
         echo '<p>' . $mensagem . '</p>';
     }
-    ?>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Formulário</title>
-</head>
-<body>
-    <form method="POST">
-        <!-- Campos do formulário... -->
-
-        <button type="submit">Salvar</button>
-    </form>
-
-    <?php
-    session_start(); // Inicia a sessão
-
-    // Verifica se existe um array de mensagens na sessão...
-    
-    // Processamento do formulário...
-
-    // Exibir as mensagens acumuladas...
 
     // Botão "Salvar"
     if (!empty($_SESSION['mensagens'])) {
@@ -112,6 +98,19 @@
 
         file_put_contents($filePath, $fileContent); // Salva o conteúdo no arquivo .txt
     }
+
+    // Botão "Limpar"
+    if (isset($_GET['limpar']) && $_GET['limpar'] === 'true') {
+        $_SESSION['mensagens'] = array(); // Limpa o array de mensagens na sessão
+        header("Location: {$_SERVER['PHP_SELF']}"); // Redireciona para a mesma página
+        exit; // Encerra o script
+    }
     ?>
+    <form method="GET">
+    <input type="hidden" name="limpar" value="true">
+    <button type="submit">Limpar Mensagens</button>
+</form>
+
 </body>
 </html>
+
