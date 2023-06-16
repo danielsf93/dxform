@@ -2,6 +2,25 @@
 <html>
 <head>
     <title>Formulário DX</title>
+    <style>
+        .download-button {
+            display: inline-block;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #EE872A;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .download-button:hover {
+            background-color: #FFA940;
+        }
+    </style>
     <script>
         function preencherDataEHoraAtual() {
             var dataEHoraAtual = new Date().toLocaleString().split(", ");
@@ -14,9 +33,10 @@
 <body onload="preencherDataEHoraAtual()">
     <font size="6" color="black" face="serif">"Formulário DX"</font></p>
     <form method="GET">
-    <input type="hidden" name="limpar" value="true">
-    <button type="submit">Limpar Ocorrências</button>
-</form>
+        <input type="hidden" name="limpar" value="true">
+        <button type="submit">Limpar Ocorrências</button>
+        <a href="mensagens.txt" download class="download-button">Baixar arquivo .txt</a>
+    </form>
     <div style="margin-top:30px;width:360px;height:310px;padding:20px;border-radius:10px;border:10px solid #EE872A;font-size:120%;">
     <form method="POST">
         <label for="horario">Horário*:</label>
@@ -56,7 +76,7 @@
         <input type="text" name="alvo" id="alvo">
         <br>
         
-        <button type="submit">Salvar</button>
+        <button type="submit">Salvar</button> 
     </form>
 
     <?php
