@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Formulário SW</title>
+    <title>Formulário DX</title>
     <script>
         function preencherDataEHoraAtual() {
             var dataEHoraAtual = new Date().toLocaleString().split(", ");
@@ -11,7 +11,7 @@
     </script>
 </head>
 <body onload="preencherDataEHoraAtual()">
-    <h1>Formulário DX</h1>
+    <font size="6" color="black" face="serif">"Formulário DX"</font></p>
 
     <form method="POST">
         <label for="horario">Horário*:</label>
@@ -24,9 +24,8 @@
         <input type="text" name="local" id="local" required>
         <br>
         <label for="frequencia">Frequência*:</label>
-        <input type="text" name="frequencia" id="frequencia" required>
+        <input type="number" name="frequencia" id="frequencia" required>
         <br>
-        
         <label for="emissora">Emissora:</label>
         <input type="text" name="emissora" id="emissora">
         <br>
@@ -80,7 +79,7 @@
             $mensagem = 'Horário: ' . $_POST['horario'] . '<br>';
             $mensagem .= 'Data: ' . $_POST['data'] . '<br>';
             $mensagem .= 'Local: ' . $_POST['local'] . '<br>';
-            $mensagem .= 'Frequência: ' . $_POST['frequencia'] . '<br>';
+            $mensagem .= 'Frequência: ' . $_POST['frequencia'] . ' KHz' . '<br>';
             $mensagem .= 'Emissora: ' . (!empty($_POST['emissora']) ? $_POST['emissora'] : 'S/I') . '<br>';
             $mensagem .= 'Idioma: ' . (!empty($_POST['idioma']) ? $_POST['idioma'] : 'S/I') . '<br>';
             $mensagem .= 'País: ' . (!empty($_POST['pais']) ? $_POST['pais'] : 'S/I') . '<br>';
@@ -135,7 +134,7 @@
             $metros = obterMetros($frequencia);
             
             // Adicionar a informação dos metros à mensagem
-            $mensagem .= 'Metros: ' . $metros . '<br>';
+            $mensagem .= 'Faixa: ' . $metros . '<br>';
 
             // Adicionar a mensagem ao array de mensagens na sessão
             $_SESSION['mensagens'][] = $mensagem;
