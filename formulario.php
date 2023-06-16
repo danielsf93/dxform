@@ -10,9 +10,14 @@
         }
     </script>
 </head>
+
 <body onload="preencherDataEHoraAtual()">
     <font size="6" color="black" face="serif">"Formulário DX"</font></p>
-
+    <form method="GET">
+    <input type="hidden" name="limpar" value="true">
+    <button type="submit">Limpar Ocorrências</button>
+</form>
+    <div style="margin-top:30px;width:360px;height:310px;padding:20px;border-radius:10px;border:10px solid #EE872A;font-size:120%;">
     <form method="POST">
         <label for="horario">Horário*:</label>
         <input type="text" name="horario" id="horario" required>
@@ -76,12 +81,12 @@
 
         if ($campos_preenchidos) {
             // Criar a mensagem com os campos preenchidos
-            $mensagem = 'Horário: ' . $_POST['horario'] . '<br>';
+            $mensagem = 'Horário: ' . $_POST['horario'] . ' ';
             $mensagem .= 'Data: ' . $_POST['data'] . '<br>';
             $mensagem .= 'Local: ' . $_POST['local'] . '<br>';
             $mensagem .= 'Frequência: ' . $_POST['frequencia'] . ' KHz' . '<br>';
             $mensagem .= 'Emissora: ' . (!empty($_POST['emissora']) ? $_POST['emissora'] : 'S/I') . '<br>';
-            $mensagem .= 'Idioma: ' . (!empty($_POST['idioma']) ? $_POST['idioma'] : 'S/I') . '<br>';
+            $mensagem .= 'Idioma: ' . (!empty($_POST['idioma']) ? $_POST['idioma'] : 'S/I') . ' ';
             $mensagem .= 'País: ' . (!empty($_POST['pais']) ? $_POST['pais'] : 'S/I') . '<br>';
             $mensagem .= 'Equipamento: ' . $_POST['equipamento'] . '<br>';
             $mensagem .= 'Antena: ' . (!empty($_POST['antena']) ? $_POST['antena'] : 'S/I') . '<br>';
@@ -158,7 +163,7 @@
         $fileName = 'mensagens.txt';
         $filePath = __DIR__ . '/' . $fileName; // Caminho completo para o arquivo .txt
 
-        echo '<a href="' . $fileName . '" download="' . $fileName . '">Salvar Mensagens</a>'; // Link para download do arquivo
+        echo '<a href="' . $fileName . '" download="' . $fileName . '">Baixar arquivo .txt</a>'; // Link para download do arquivo
 
         file_put_contents($filePath, $fileContent); // Salva o conteúdo no arquivo .txt
     }
@@ -170,10 +175,7 @@
         exit; // Encerra o script
     }
     ?>
-    <form method="GET">
-    <input type="hidden" name="limpar" value="true">
-    <button type="submit">Limpar Mensagens</button>
-</form>
+   
 
 </body>
 </html>
