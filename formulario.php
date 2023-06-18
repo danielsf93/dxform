@@ -35,7 +35,7 @@
     <form method="GET">
         <input type="hidden" name="limpar" value="true">
         <button type="submit">Limpar Ocorrências</button>
-        <a href="mensagens.txt" download class="download-button">Baixar arquivo .txt</a>
+        <a href="mensagens.txt" download="mensagens_<?php echo date('Y-m-d'); ?>.txt" class="download-button">Baixar arquivo .txt</a>
     </form>
     <div style="margin-top:30px;width:360px;height:310px;padding:20px;border-radius:10px;border:10px solid #EE872A;font-size:120%;">
     <form method="POST">
@@ -176,17 +176,17 @@
     }
 
     // Botão "Salvar"
-    if (!empty($_SESSION['mensagens'])) {
-        $mensagensText = implode("\n\n", $_SESSION['mensagens']); // Concatena as mensagens em um único texto separado por duas quebras de linha
-        $fileContent = "Mensagens:\n\n" . $mensagensText; // Conteúdo do arquivo .txt
-        
-        $fileName = 'mensagens.txt';
-        $filePath = __DIR__ . '/' . $fileName; // Caminho completo para o arquivo .txt
+if (!empty($_SESSION['mensagens'])) {
+    $mensagensText = implode("\n\n", $_SESSION['mensagens']); // Concatena as mensagens em um único texto separado por duas quebras de linha
+    $fileContent = "Mensagens:\n\n" . $mensagensText; // Conteúdo do arquivo .txt
+    
+    $fileName = 'mensagens_' . date('Y-m-d') . '.txt'; // Novo nome do arquivo
+    $filePath = __DIR__ . '/' . $fileName; // Caminho completo para o arquivo .txt
 
-        echo '<a href="' . $fileName . '" download="' . $fileName . '">Baixar arquivo .txt</a>'; // Link para download do arquivo
+    echo '<a href="' . $fileName . '" download="' . $fileName . '">Baixar arquivo .txt</a>'; // Link para download do arquivo
 
-        file_put_contents($filePath, $fileContent); // Salva o conteúdo no arquivo .txt
-    }
+    file_put_contents($filePath, $fileContent); // Salva o conteúdo no arquivo .txt
+}
 
     // Botão "Limpar"
     if (isset($_GET['limpar']) && $_GET['limpar'] === 'true') {
